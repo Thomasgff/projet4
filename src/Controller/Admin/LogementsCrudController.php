@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Logements;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class LogementsCrudController extends AbstractCrudController
 {
@@ -19,15 +21,18 @@ class LogementsCrudController extends AbstractCrudController
             Field::new('reference'),
             Field::new('typologie'),
             Field::new('capacite'),
-            Field::new('latitude'),
-            Field::new('longitude'),
-            Field::new('dispos'),
+            TextField::new('latitude'),
+            TextField::new('longitude'),
+            ArrayField::new('dispos'),
             Field::new('prix'),
             Field::new('superficie'),
             Field::new('description'),
             Field::new('nom'),
             Field::new('chambres'),
             Field::new('salledebain'),
+            Field::new('ville'),
+            Field::new('region'),
+            Field::new('postcode'),
             Field::new('wifi')
         ];
     }

@@ -23,20 +23,20 @@ class Logements
     #[ORM\Column(length: 255)]
     private ?string $capacite = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 20, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $latitude = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 20, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $longitude = null;
 
-    #[ORM\Column(type: Types::BLOB)]
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $image = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[ORM\Column(Types::ARRAY, nullable: true)]
     private array $dispos = [];
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $prix = [];
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $prix = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $superficie = null;
@@ -55,6 +55,15 @@ class Logements
 
     #[ORM\Column(nullable: true)]
     private ?bool $wifi = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ville = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $region = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $postcode = null;
 
     public function __toString(): string
     {
@@ -150,12 +159,12 @@ class Logements
         return $this;
     }
 
-    public function getPrix(): array
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(?array $prix): self
+    public function setPrix(?string $prix): self
     {
         $this->prix = $prix;
 
@@ -230,6 +239,42 @@ class Logements
     public function setWifi(?bool $wifi): self
     {
         $this->wifi = $wifi;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getPostcode(): ?int
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode(?int $postcode): self
+    {
+        $this->postcode = $postcode;
 
         return $this;
     }

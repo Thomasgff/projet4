@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Atypik Home{% endblock %}</title>
-
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         {% block stylesheets %}
             <link href="../css/style.css" rel="stylesheet">
             <link href="../css/bootstrap.css" rel="stylesheet">
@@ -214,8 +214,10 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-        
-        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA72H73BZYg98wMW2hVSYi41xjrYVw4sdg&callback=initMap&v=weekly" defer></script>
         <script src="../js/main.js"></script>
+        {% block scriptsSpe %}
+            
+        {% endblock %}
     </body>
 </html>
