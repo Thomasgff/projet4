@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        
+            <!-- Vignette d'équipement -->
+             <div class="row g-4">
+                {% for logement in logements %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item shadow rounded overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="images/vignette.png" alt="">
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white rounded py-1 px-3 ms-4">$100/Night</small>
+                        </div>
+                        <div class="p-4 mt-2">
+                            <div class="d-flex justify-content-between mb-3">
+                                <h5 class="mb-0">{{ logement.nom }}</h5>
+                                <div class="ps-2">
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-success me-2"></i>3 Bed</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-success me-2"></i>2 Bath</small>
+                                <small><i class="fa fa-wifi text-success me-2"></i>Wifi</small>
+                            </div>
+                            <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <div class="d-flex flex-row-reverse">
+                                <a href="{{ path('logement', { reference: logement.reference }) }}" class="btn btn-sm btn-success rounded py-2 px-4" href="">+ d'infos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        
+{% endblock %}

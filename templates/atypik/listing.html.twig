@@ -1,3 +1,16 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block title %}{{ logement }}{% endblock %}
+
+{% block body %}
+        <div id="stockageDispos" display="hidden" data-my-variable="{{ logement.dispos|json_encode }}"></div>
+        <label for="checkin">Check-in Date:</label>
+        <input type="text" id="checkin">
+
+        <label for="checkout">Check-out Date:</label>
+        <input type="text" id="checkout">
+
+{% endblock %}
+
