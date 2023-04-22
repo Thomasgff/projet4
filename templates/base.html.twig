@@ -6,8 +6,8 @@
         <title>{% block title %}Atypik Home{% endblock %}</title>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         {% block stylesheets %}
-            <link href="../css/style.css" rel="stylesheet">
-            <link href="../css/bootstrap.css" rel="stylesheet">
+            <link href="../../css/style.css" rel="stylesheet">
+            <link href="../../css/bootstrap.css" rel="stylesheet">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
             <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -84,7 +84,7 @@
                                             <a class="nav-link dropdown-toggle text-decoration-none text-light" data-bs-toggle="dropdown"><i class="bi bi-person ms-3"></i> {{ app.user.nickname }}</a>
                                             <div class="dropdown-menu rounded-0 m-0">
                                                 <a href="" class="dropdown-item">Profil</a>
-                                                <a href="" class="dropdown-item">Mes réservations</a>
+                                                <a href="{{ path('mesreservations') }}" class="dropdown-item">Mes réservations</a>
                                                 {% if is_granted('ROLE_PROPRIO') %}
                                                 <a href="{{ path('accueilbo') }}" class="dropdown-item">Mes annonces</a>
                                                 {% endif %}
@@ -119,13 +119,14 @@
                                         <a class="nav-link dropdown-toggle text-decoration-none text-light" data-bs-toggle="dropdown"><i class="bi bi-person ms-3"></i> {{ app.user.nickname }}</a>
                                         <div class="dropdown-menu rounded-0 m-0">
                                             <a href="" class="dropdown-item">Profil</a>
-                                            <a href="" class="dropdown-item">Mes réservations</a>
+                                            <a href="{{ path('mesreservations') }}" class="dropdown-item">Mes réservations</a>
                                             {% if is_granted('ROLE_PROPRIO') %}
                                             <a href="{{ path('accueilbo') }}" class="dropdown-item">Mes annonces</a>
                                             {% endif %}
                                             {% if is_granted('ROLE_ADMIN') %}
                                             <a href="{{ path('accueilbo') }}" class="dropdown-item">Back Office</a>
                                             {% endif %}
+                                            <a href="" class="dropdown-item text-capitalize py-2 fst-italic">Se déconnecter</a>
                                         </div>
                                     </div>
                                     {% else %}
@@ -233,12 +234,12 @@
                 integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
                 crossorigin="anonymous">
 		</script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-        <script src="../js/main.js"></script>
+        <script src="../../js/main.js"></script>
         {% block scriptsSpe %}
             
         {% endblock %}

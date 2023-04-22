@@ -58,51 +58,54 @@
                             </div>
                             <div class="col-md-4 pt-2">
                                 <!-- SECTION BOOKING -->
-                                <div class="card shadow border-0 mb-3 mb-md-4">
-                                    <header class="text-light bg-dark">
-                                        <p class=" d-flex justify-content-center align-items-center h4">
-                                            <span class="mr-2 p-2">Réservez en toute sécurité</span>
-                                        </p>
-                                    </header>
-                                    <div>
-                                        <div class="mb-1 d-flex flex-nowrap">
-                                            <div class="">
-                                                <p class="mb-0 font-size-1 font-weight-bold p-2">
-                                                    Maison {{ logement.capacite }} personnes
-                                                </p>
-                                                <p class="p-2 mb-0 small">
-                                                    {{ logement.chambres + 1 }} pièces - {{ logement.chambres }} chambre{% if logement.chambres > 1 %}s{% endif %} - {{ logement.superficie }}m²
-                                                </p>
+                                <form action="{{ path('reservation', { reference: logement.reference }) }}" method="GET">
+                                    <div class="card shadow border-0 mb-3 mb-md-4">
+                                        <header class="text-light bg-dark">
+                                            <p class=" d-flex justify-content-center align-items-center h4">
+                                                <span class="mr-2 p-2">Réservez en toute sécurité</span>
+                                            </p>
+                                        </header>
+                                        <div>
+                                            <div class="mb-1 d-flex flex-nowrap">
+                                                <div class="">
+                                                    <p class="mb-0 font-size-1 font-weight-bold p-2">
+                                                        Maison {{ logement.capacite }} personnes
+                                                    </p>
+                                                    <p class="p-2 mb-0 small">
+                                                        {{ logement.chambres + 1 }} pièces - {{ logement.chambres }} chambre{% if logement.chambres > 1 %}s{% endif %} - {{ logement.superficie }}m²
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2">                                         
+                                                <div class="p-2">                                                  
+                                                    <div id="stockageDispos" style=display:none data-my-variable="{{ logement.dispos|json_encode }}"></div>
+                                                    <div id="stockagePrix" style=display:none data-my-variable="{{ logement.prix }}"></div>
+                                                    <div id="stockageLatitude" style=display:none data-my-variable="{{ logement.latitude }}"></div>
+                                                    <div id="stockageLongitude" style=display:none data-my-variable="{{ logement.longitude }}"></div>
+                                                    <div class="mb-3">
+                                                        <label for="checkin" class="form-label">Check-in Date:</label>
+                                                        <input type="text" class="form-control" id="checkin" name="checkin" required>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="checkout" class="form-label">Check-out Date:</label>
+                                                        <input type="text" class="form-control" id="checkout" name="checkout" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex align-item-center">
+                                                <div class="d-flex text-center text-success fs-4 justify-content-center">
+                                                    <input type="int" class="form-control d-none" id="prix" name="prix" readonly required>
+                                                    <span id="prixFinal">-</span>
+                                                    <div class="vr border mx-3"></div>
+                                                    <span id="nbNuits">- nuits</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="mb-2">
-                                            <form class="p-2">                                                  
-                                                <div id="stockageDispos" style=display:none data-my-variable="{{ logement.dispos|json_encode }}"></div>
-                                                <div id="stockagePrix" style=display:none data-my-variable="{{ logement.prix }}"></div>
-                                                <div id="stockageLatitude" style=display:none data-my-variable="{{ logement.latitude }}"></div>
-                                                <div id="stockageLongitude" style=display:none data-my-variable="{{ logement.longitude }}"></div>
-                                                <div class="mb-3">
-                                                    <label for="checkin" class="form-label">Check-in Date:</label>
-                                                    <input type="text" class="form-control" id="checkin">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="checkout" class="form-label">Check-out Date:</label>
-                                                    <input type="text" class="form-control" id="checkout">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="flex align-item-center">
-                                            <div class="d-flex text-center text-success fs-4 justify-content-center">
-                                                <span id="prixFinal">-</span>
-                                                <div class="vr border mx-3"></div>
-                                                <span id="nbNuits">- nuits</span>
-                                            </div>
-                                        </div>
+                                        <footer class="text-center p-3">
+                                            <button type="submit" class="col-12 btn btn-sm btn-success rounded text-center py-2">Réserver</a>
+                                        </footer>
                                     </div>
-                                    <footer class="text-center p-3">
-                                        <a href="{{ path('logement', { reference: logement.reference }) }}" class="col-12 btn btn-sm btn-success rounded text-center py-2">Réserver</a>
-                                    </footer>
-                                </div>   
+                                </form>   
                             </div>
                         </div>
                         <div class="row">

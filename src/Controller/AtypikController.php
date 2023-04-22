@@ -3,20 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\Logements;
+use App\Entity\Reservations;
+use App\Form\ReservationFormType;
 use App\Repository\CoupsdecoeurRepository;
 use App\Repository\LogementsRepository;
+use App\Repository\ReservationsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
 class AtypikController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
+       private EntityManagerInterface $entityManager,
     ) {
     }
     
@@ -57,6 +61,56 @@ class AtypikController extends AbstractController
            'controller_name' => 'AtypikController'
         ]);
     }
+    
+    //Controller gérant la prise de réservation
+    #[Route('/logements/reservation/{reference}', name: 'reservation')]
+    public function reservation(Request $request, EntityManagerInterface $entityManager, Logements $logement): Response
+    {     
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $booking = new Reservations(); 
+        $form = $this->createForm(ReservationFormType::class,$booking); 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($booking);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('confirmation');
+        }
+        
+        
+        return $this->render('atypik/vel.html.twig', [
+            'logement' => $logement,
+            'reservationForm' => $form->createView()
+        ]);
+    }    
+
+    //Confirmation de résa
+    #[Route('/confirmation', name: 'confirmation')]
+    public function conf(): Response
+    {     
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');        
+        
+        return $this->render('atypik/conf.html.twig', [
+        ]);
+    }    
+
+    //Réservations de l'user
+    #[Route('/mesreservations', name: 'mesreservations')]
+    public function resas(Security $security, ReservationsRepository $reservationsRepository): Response
+    {     
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');   
+        
+        $user = $security->getUser();
+        $email = $user->getEmail();
+
+        $reservations = $reservationsRepository->findBy(['email' => $email]);
+        
+        return $this->render('atypik/reservations.html.twig', [
+            'email' => $email,
+            'reservations' => $reservations
+        ]);
+    }    
 
     #[Route('/accueilbo', name: 'accueilbo')]
     public function bo(): Response
