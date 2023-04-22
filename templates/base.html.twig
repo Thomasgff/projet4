@@ -8,7 +8,7 @@
         {% block stylesheets %}
             <link href="../css/style.css" rel="stylesheet">
             <link href="../css/bootstrap.css" rel="stylesheet">
-			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
             <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
-                                <a href="index.html" class="navbar-brand d-block d-lg-none">
+                                <a href="{{ path('homepage') }}" class="navbar-brand d-block d-lg-none">
                                     <h1 class="m-0 text-light text-uppercase kalam">Atypik Home</h1>
                                 </a>
                                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -79,7 +79,27 @@
                                 </button>
                                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                     <div class="navbar-nav mr-auto py-0">
-                                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <div class="nav-item dropdown btn rounded-0 py-4 px-mx-1 d-lg-none">
+                                            <a class="nav-link dropdown-toggle text-decoration-none text-light" data-bs-toggle="dropdown"><i class="bi bi-person ms-3"></i> {{ app.user.nickname }}</a>
+                                            <div class="dropdown-menu rounded-0 m-0">
+                                                <a href="" class="dropdown-item">Profil</a>
+                                                <a href="" class="dropdown-item">Mes réservations</a>
+                                                {% if is_granted('ROLE_PROPRIO') %}
+                                                <a href="{{ path('accueilbo') }}" class="dropdown-item">Mes annonces</a>
+                                                {% endif %}
+                                                {% if is_granted('ROLE_ADMIN') %}
+                                                <a href="{{ path('accueilbo') }}" class="dropdown-item">Back Office</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <a href="/login" class="btn rounded-0 py-4 px-mx-1 d-lg-none text-capitalize">
+                                            <i class="bi bi-person ms-3"></i> 
+                                            Mon compte
+                                        </a>  
+                                        {% endif %}
+                                        <a href="{{ path('homepage') }}" class="nav-item nav-link active">Home</a>
                                         <a href="about.html" class="nav-item nav-link">About</a>
                                         <a href="service.html" class="nav-item nav-link">Services</a>
                                         <a href="room.html" class="nav-item nav-link">Rooms</a>
@@ -100,10 +120,14 @@
                                         <div class="dropdown-menu rounded-0 m-0">
                                             <a href="" class="dropdown-item">Profil</a>
                                             <a href="" class="dropdown-item">Mes réservations</a>
+                                            {% if is_granted('ROLE_PROPRIO') %}
+                                            <a href="{{ path('accueilbo') }}" class="dropdown-item">Mes annonces</a>
+                                            {% endif %}
                                             {% if is_granted('ROLE_ADMIN') %}
                                             <a href="{{ path('accueilbo') }}" class="dropdown-item">Back Office</a>
                                             {% endif %}
                                         </div>
+                                    </div>
                                     {% else %}
                                     <a href="/login" class="btn btn-success rounded-0 py-4 px-mx-1 d-none d-lg-block text-capitalize">
                                         <i class="bi bi-person ms-3"></i> 
@@ -172,7 +196,7 @@
                                 <a class="btn btn-link" href="">Qui sommes-nous?</a>
                                 <a class="btn btn-link" href="">Nous contacter</a>
                                 <a class="btn btn-link" href="">Mentions légales</a>
-                                <a class="btn btn-link" href="">Conditions générales de vente</a>
+                                <a class="btn btn-link" href="{{ path('cgu') }}">Conditions générales d'usage</a>
                             </div>
                         </div>
                     </div>
@@ -214,7 +238,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA72H73BZYg98wMW2hVSYi41xjrYVw4sdg&callback=initMap&v=weekly" defer></script>
         <script src="../js/main.js"></script>
         {% block scriptsSpe %}
             

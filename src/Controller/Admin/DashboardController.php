@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Coupsdecoeur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -49,5 +50,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('Logements', 'fas fa-map-marker-alt', Logements::class);
         yield MenuItem::linkToCrud('User', 'fas fa-comments', User::class);
+        yield MenuItem::linkToCrud('Coups de coeur', 'fas fa-comments', Coupsdecoeur::class);
     }
 }

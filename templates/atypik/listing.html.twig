@@ -20,7 +20,9 @@
                                     <span>{{ logement.ville }} - {{ logement.region }}</span>
                                     <div class="d-none d-md-flex">
                                         <div class="d-flex flex-wrap align-items-center ">
-                                            <div class="text-dark my-lg-0 my-1 ml-lg-2 ml-1 small">Référence: {{ logement.reference }}</div>
+                                            <div class="text-dark my-lg-0 my-1 ml-lg-2 ml-1 small">
+                                                Référence: {{ logement.reference }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -28,20 +30,20 @@
                         </div>   
                     </div>
                 </header>
-                <main>
+                <div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-8 pt-2">
                                 <div id="carouselExample" class="carousel slide">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                        <img src="..\images\carroussel1.png" class="d-block w-100" alt="...">
+                                            <img src="../images/vignette.png" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                        <img src="..\images\carroussel2.png" class="d-block w-100" alt="...">
+                                            <img src="../images/vignette.png" class="d-block w-100" alt="...">
                                         </div>
                                         <div class="carousel-item">
-                                        <img src="..\images\carroussel3.png." class="d-block w-100" alt="...">
+                                            <img src="../images/vignette.png." class="d-block w-100" alt="...">
                                         </div>
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -56,20 +58,20 @@
                             </div>
                             <div class="col-md-4 pt-2">
                                 <!-- SECTION BOOKING -->
-                                <section class="card shadow border-0 mb-3 mb-md-4">
+                                <div class="card shadow border-0 mb-3 mb-md-4">
                                     <header class="text-light bg-dark">
                                         <p class=" d-flex justify-content-center align-items-center h4">
                                             <span class="mr-2 p-2">Réservez en toute sécurité</span>
                                         </p>
                                     </header>
-                                    <main>
+                                    <div>
                                         <div class="mb-1 d-flex flex-nowrap">
                                             <div class="">
                                                 <p class="mb-0 font-size-1 font-weight-bold p-2">
-                                                    Maison 4 personnes
+                                                    Maison {{ logement.capacite }} personnes
                                                 </p>
                                                 <p class="p-2 mb-0 small">
-                                                    2 pièces - 1 chambre - 45 m²
+                                                    {{ logement.chambres + 1 }} pièces - {{ logement.chambres }} chambre{% if logement.chambres > 1 %}s{% endif %} - {{ logement.superficie }}m²
                                                 </p>
                                             </div>
                                         </div>
@@ -86,7 +88,8 @@
                                                 <div class="mb-3">
                                                     <label for="checkout" class="form-label">Check-out Date:</label>
                                                     <input type="text" class="form-control" id="checkout">
-                                                <div class="mb-3">
+                                                </div>
+                                            </form>
                                         </div>
                                         <div class="flex align-item-center">
                                             <div class="d-flex text-center text-success fs-4 justify-content-center">
@@ -95,26 +98,70 @@
                                                 <span id="nbNuits">- nuits</span>
                                             </div>
                                         </div>
-                                    </main>
-                                    <footer class="text-center pb-2 px-2">
-                                        <a href="{{ path('logement', { reference: logement.reference }) }}" class="col-12 btn btn-sm btn-success rounded text-center py-2" href="">Réserver</a>
+                                    </div>
+                                    <footer class="text-center p-3">
+                                        <a href="{{ path('logement', { reference: logement.reference }) }}" class="col-12 btn btn-sm btn-success rounded text-center py-2">Réserver</a>
                                     </footer>
-                                </section>   
+                                </div>   
                             </div>
-                        <div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pt-2 shadow">
+                                <header class="text-light bg-dark">
+                                        <p class=" d-flex justify-content-center align-items-center h4">
+                                            <span class="mr-2 p-2">Description</span>
+                                        </p>
+                                </header>
+                                <div>
+                                    <div class="px-2 py-4">
+                                        {{ logement.description }}
+                                    </div>
+                                    <div class="px-2">
+                                        <h4 class="">Description intérieure</h4>
+                                        <ul class="d-flex justify-content-between px-4 border-bottom border-line border-md-0 ">
+                                            <li id="superficie" class="p-4 d-block">{{ logement.superficie }}m²</li>
+                                            <li id="piece" class="p-4 d-block">{{ logement.chambres + 1 }} pièces</li>
+                                            <li id="chambre" class="p-4 d-block">{{ logement.chambres}} chambre{% if logement.chambres > 1 %}s{% endif %}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="px-2">
+                                        <h4 class="">Options et services</h4>
+                                        <ul class="d-flex justify-content-between px-4">
+                                            <li id="animaux" class="p-2 d-block"><i class="d-none d-xl-inline bi bi-tencent-qq text-dark px-1"></i>Animaux : {% if logement.animaux == true %}oui{% else %}non{% endif %}</li>
+                                            <li id="internet" class="p-2 d-block">{% if logement.internet == true %}<i class="d-none d-xl-inline bi bi-wifi text-dark px-1"></i>Internet : oui{% else %}<i class="d-none d-xl-inline bi bi-wifi-off text-dark px-1"></i>Internet : non{% endif %}</li>
+                                            <li id="menage" class="p-2 d-block"><i class="d-none d-xl-inline bi bi-trash3 text-dark px-1"></i>Ménage : {% if logement.menage == true %}inclus{% else %}non inclus{% endif %}</li>
+                                        </ul>
+                                        <ul class="d-flex justify-content-between px-4">
+                                            <li id="barbecue" class="p-2 d-block"><i class="d-none d-xl-inline bi bi-fire text-dark px-1"></i>Barbecue : {% if logement.barbecue == true %}oui{% else %}non{% endif %}</li>
+                                            <li id="piscine" class="p-2 d-block"><i class="d-none d-xl-inline bi bi-droplet text-dark px-1"></i>Piscine : {% if logement.piscine == true %}oui{% else %}non{% endif %}</li>
+                                            <li id="climatisation" class="p-2 d-block"><i class="d-none d-xl-inline bi bi-fan text-dark px-1"></i>Air conditionné : {% if logement.clim == true %}oui{% else %}non{% endif %}</li>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 pt-2 shadow">
+                                <header class="text-light bg-dark">
+                                        <p class=" d-flex justify-content-center align-items-center h4">
+                                            <span class="mr-2 p-2">Positionnement géographique de votre location</span>
+                                        </p>
+                                </header>
+                                <!--The div element for the map -->
+                                <div id="map"></div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Positionnement géographique de votre location</h3>
-                    <!--The div element for the map -->
-                    <div id="map"></div>
-                </main>
+                    
+                </div>
             </article>
-        <div>  
+        </div>  
     </main>
 
 
 {% endblock %}
 
 {% block scriptsSpe %}
-         <script src="../js/listing.js"></script>   
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA72H73BZYg98wMW2hVSYi41xjrYVw4sdg&callback=initMap&v=weekly" defer></script>
+        <script src="../js/listing.js"></script>   
 {% endblock %}
 

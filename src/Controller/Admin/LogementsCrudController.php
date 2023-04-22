@@ -19,6 +19,7 @@ class LogementsCrudController extends AbstractCrudController
     {
         return [
             Field::new('reference'),
+            Field::new('coupdecoeur'),
             Field::new('typologie'),
             Field::new('capacite'),
             TextField::new('latitude'),
@@ -33,6 +34,12 @@ class LogementsCrudController extends AbstractCrudController
             Field::new('ville'),
             Field::new('region'),
             Field::new('postcode'),
+            Field::new('animaux'),
+            Field::new('barbecue'),
+            Field::new('piscine'),
+            Field::new('internet'),
+            Field::new('menage'),
+            Field::new('clim'),
             Field::new('wifi')
         ];
     }

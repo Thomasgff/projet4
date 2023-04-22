@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Logements;
 use App\Repository\LogementsRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,14 +48,49 @@ class AtypikController extends AbstractController
         ]));
     }
 
+    //Controller affichant les conditions générales d'usage
+    #[Route('/cgu', name: 'cgu')]
+    public function cgu(): Response
+    {                  
+        return $this->render('atypik/cgu.html.twig', [
+           'controller_name' => 'AtypikController'
+        ]);
+    }
+
     #[Route('/accueilbo', name: 'accueilbo')]
     public function bo(): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         return $this->render('BO/accueilBO.html.twig', [
-            'controller_name' => 'accueilbo',
+            'controller_name' => 'AtypikController',
         ]);
     }
+
+
+    #[Route('/accueilbo/users', name: 'gestionUsers')]
+    public function gestionUsers(UserRepository $userRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        return $this->render('BO/gestionUsers.html.twig', [
+            'users' => $userRepository->findAll(),
+            'controller_name' => 'AtypikController'
+        ]);
+    }
+
+    #[Route('/accueilbo/gestionhomepage', name: 'affichageHome')]
+    public function gestionHome(LogementsRepository $logementsRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        return $this->render('BO/gestionHome.html.twig', [
+            'logements' => $logementsRepository->findAll(),
+            'controller_name' => 'AtypikController'
+        ]);
+    }
+
+
+
 
 }

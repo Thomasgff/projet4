@@ -65,6 +65,24 @@ class Logements
     #[ORM\Column(nullable: true)]
     private ?int $postcode = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $animaux = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $internet = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $menage = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $barbecue = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $piscine = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $clim = null;
+
     public function __toString(): string
     {
         return $this->typologie.' '.$this->nom;
@@ -278,4 +296,77 @@ class Logements
 
         return $this;
     }
+
+    public function isAnimaux(): ?bool
+    {
+        return $this->animaux;
+    }
+
+    public function setAnimaux(?bool $animaux): self
+    {
+        $this->animaux = $animaux;
+
+        return $this;
+    }
+
+    public function isInternet(): ?bool
+    {
+        return $this->internet;
+    }
+
+    public function setInternet(?bool $internet): self
+    {
+        $this->internet = $internet;
+
+        return $this;
+    }
+
+    public function isMenage(): ?bool
+    {
+        return $this->menage;
+    }
+
+    public function setMenage(?bool $menage): self
+    {
+        $this->menage = $menage;
+
+        return $this;
+    }
+
+    public function isBarbecue(): ?bool
+    {
+        return $this->barbecue;
+    }
+
+    public function setBarbecue(?bool $barbecue): self
+    {
+        $this->barbecue = $barbecue;
+
+        return $this;
+    }
+
+    public function isPiscine(): ?bool
+    {
+        return $this->piscine;
+    }
+
+    public function setPiscine(?bool $piscine): self
+    {
+        $this->piscine = $piscine;
+
+        return $this;
+    }
+
+    public function isClim(): ?bool
+    {
+        return $this->clim;
+    }
+
+    public function setClim(?bool $clim): self
+    {
+        $this->clim = $clim;
+
+        return $this;
+    }
+
 }

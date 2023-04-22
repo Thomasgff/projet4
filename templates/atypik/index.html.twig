@@ -151,7 +151,7 @@
                             </div>
                             <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
                             <div class="d-flex flex-row-reverse">
-                                <a class="btn btn-sm btn-success rounded py-2 px-4" href="">+ d'infos</a>
+                                <a class="btn btn-sm btn-success rounded py-2 px-4" href="{{ path('logement', { reference: 1 }) }}">+ d'infos</a>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             </div>
                             <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
                             <div class="d-flex flex-row-reverse">
-                                <a class="btn btn-sm btn-success rounded py-2 px-4" href="">+ d'infos</a>
+                                <a class="btn btn-sm btn-success rounded py-2 px-4" href="{{ path('logement', { reference: 1 }) }}">+ d'infos</a>
                             </div>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                             </div>
                             <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
                             <div class="d-flex flex-row-reverse">
-                                <a class="btn btn-sm btn-success rounded py-2 px-4" href="">+ d'infos</a>
+                                <a class="btn btn-sm btn-success rounded py-2 px-4" href="{{ path('logement', { reference: 1 }) }}">+ d'infos</a>
                             </div>
                         </div>
                     </div>
@@ -219,4 +219,8 @@
     </div>
     <!-- Fin liste logements -->   
 
+{% endblock %}
+
+{% block scriptsSpe %}
+         <script src="../js/index.js"></script>   
 {% endblock %}
