@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Logements;
+use App\Repository\CoupsdecoeurRepository;
 use App\Repository\LogementsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -80,12 +81,13 @@ class AtypikController extends AbstractController
     }
 
     #[Route('/accueilbo/gestionhomepage', name: 'affichageHome')]
-    public function gestionHome(LogementsRepository $logementsRepository): Response
+    public function gestionHome(LogementsRepository $logementsRepository, CoupsdecoeurRepository $coupsdecoeurRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         return $this->render('BO/gestionHome.html.twig', [
             'logements' => $logementsRepository->findAll(),
+            'coupsdecoeur' => $coupsdecoeurRepository->findAll(),
             'controller_name' => 'AtypikController'
         ]);
     }
